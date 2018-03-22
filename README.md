@@ -8,7 +8,7 @@
  - Install a new D8 site with composer
 
 ```php
-composer create-project drupal-composer/drupal-project:8.x-dev some-dir --stability dev --no-interaction
+composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
 ```
 ## Edit hosts file.
 
