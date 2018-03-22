@@ -141,15 +141,15 @@ services:
 #      - 'traefik.port=80'
 #      - 'traefik.frontend.rule=Host:pma.${PROJECT_BASE_URL}'
 
-#  solr:
-#    image: wodby/drupal-solr:$SOLR_TAG
-#    container_name: "${PROJECT_NAME}_solr"
-#    environment:
-#      SOLR_HEAP: 1024m
-#    labels:
-#      - 'traefik.backend=solr'
-#      - 'traefik.port=8983'
-#      - 'traefik.frontend.rule=Host:solr.${PROJECT_BASE_URL}'
+  solr:
+    image: wodby/drupal-solr:$SOLR_TAG
+    container_name: "${PROJECT_NAME}_solr"
+    environment:
+      SOLR_HEAP: 1024m
+    labels:
+      - 'traefik.backend=solr'
+      - 'traefik.port=8983'
+      - 'traefik.frontend.rule=Host:solr.${PROJECT_BASE_URL}'
 
 #  nodejs:
 #    image: wodby/drupal-node:$DRUPAL_NODE_TAG
