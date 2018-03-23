@@ -161,7 +161,7 @@ services:
     labels:
       - 'traefik.backend=node'
       - 'traefik.port=8080'
-      - 'traefik.frontend.rule=Host:frontapp.${PROJECT_BASE_URL}'
+      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
     volumes:
       - ./frontapp:/home/node/app
 #    expose:
