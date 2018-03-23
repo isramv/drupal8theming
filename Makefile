@@ -24,3 +24,6 @@ ps:
 
 shell:
 	docker exec -ti $(shell docker ps --filter name='$(PROJECT_NAME)_php' --format "{{ .ID }}") sh
+
+node:
+	docker exec -ti $(shell docker ps --filter name='$(PROJECT_NAME)_nodejs' --format "{{ .ID }}") sh

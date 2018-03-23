@@ -1,4 +1,6 @@
-contenta/
+contenta/**
+!contenta/composer.json
+frontapp/node_modules/
 .idea/
 .idea/**
 

@@ -32,7 +32,7 @@ services:
 #      PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"
 #      PHP_BLACKFIRE: 1
     volumes:
-      - ./drupal:/var/www/html
+      - ./contenta:/var/www/html
 ## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
 #      - ./:/var/www/html:cached # User-guided caching
 #      - docker-sync:/var/www/html # Docker-sync
@@ -51,7 +51,7 @@ services:
       NGINX_SERVER_ROOT: /var/www/html/web
 #      NGINX_DRUPAL_FILE_PROXY_URL: http://example.com
     volumes:
-      - ./drupal:/var/www/html
+      - ./contenta:/var/www/html
 # For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
 #      - ./:/var/www/html:cached # User-guided caching
 #      - docker-sync:/var/www/html # Docker-sync
@@ -151,17 +151,37 @@ services:
       - 'traefik.port=8983'
       - 'traefik.frontend.rule=Host:solr.${PROJECT_BASE_URL}'
 
+  node:
+    image: "node:8"
+    user: "node"
+    container_name: "${PROJECT_NAME}_node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    labels:
+      - 'traefik.backend=node'
+      - 'traefik.port=8080'
+      - 'traefik.frontend.rule=Host:frontapp.${PROJECT_BASE_URL}'
+    volumes:
+      - ./frontapp:/home/node/app
+#    expose:
+#      - "8081"
+#    command: "npm start"
+    ports:
+      - '8080:3000'
+    command: sh -c 'npm install && npm run start'
+
 #  nodejs:
 #    image: wodby/drupal-node:$DRUPAL_NODE_TAG
-#    container_name: "${PROJECT_NAME}_drupal_nodejs"
+#    container_name: "${PROJECT_NAME}_nodejs"
 #    environment:
 #       NODE_SERVICE_KEY: node-service-key
 #    labels:
 #      - 'traefik.backend=nodejs'
 #      - 'traefik.port=8080'
-#      - 'traefik.frontend.rule=Host:nodejs.${PROJECT_BASE_URL}'
+#      - 'traefik.frontend.rule=Host:front.${PROJECT_BASE_URL}'
 #    volumes:
-#      - ./path/to/your/single-page-app:/app
+#      - ./frontapp:/app
 #    command: sh -c 'npm install && npm run start'
 
 #  memcached:
